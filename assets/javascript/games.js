@@ -5,6 +5,7 @@ var winner;
 var guessesRemaining = 12;
 
 var spanUserChoice = document.getElementById("spanUserChoice");
+console.log(spanUserChoice)
 // spanUserChoice.innerHTML = spanUserChoice.join(',');
 var spanUserWins   = document.getElementById("spanUserWins");
 var spanUserLosses = document.getElementById("spanUserLosses");
@@ -23,12 +24,17 @@ var spanUserGuessed= ("spanUserGuessed");
 //starting parts of the game, and 2. a game over function that states game over
 //when user wins or loses 12 guesses and calls the initalize function
 
+
+
+
+
 document.onkeyup = function(event) {
 	var userChoice = event.key;
 	var index = Math.floor(Math.random() * outcomes.length);
 	computerChoice = outcomes[index];
 
-	spanUserChoice.textContent= userChoice;
+
+
 
 
 	if(userChoice == computerChoice){
@@ -43,9 +49,15 @@ document.onkeyup = function(event) {
 
 	}else {spanWinner.textContent="you guessed wrong!";
 	    userLosses ++;
+	    userChoiceText= spanUserChoice.innerText;
+	    console.log(userChoiceText);
 	    spanUserLosses.textContent= userLosses;
 	    guessesRemaining = 12 - userLosses;
 		spanGuessesRemaining.textContent= guessesRemaining;
+		userChoiceText= userChoiceText + ', ' + userChoice;
+		console.log(userChoiceText);
+		spanUserChoice.innerHTML=userChoiceText;
+
 		//spanUserGuessed= spanUserChoice.join(',');
 		//userChoice= userChoice.join(',');
 		//spanUserChoice= userChoice;
@@ -54,8 +66,9 @@ document.onkeyup = function(event) {
 
 		
 		
-		if(guessesRemaining == 0){alert("GAME OVERRRRRR");
- 		location.reload();
+		if(guessesRemaining == 0){
+			alert("GAME OVERRRRRR");
+ 			initGame();
 // location.reload works to reset the game, but need other way to reset it
 	     }
 
